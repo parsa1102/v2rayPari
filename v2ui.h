@@ -2,9 +2,11 @@
 #define V2UI_H
 
 #include <QWidget>
+#include <QMap>
 class QMenuBar;
 class getServerDialog;
 class Handler;
+class v2Server;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class v2Ui; }
@@ -26,11 +28,20 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void serverAdded(v2Server *);
 
     void on_connectButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+
+    void on_listWidget_doubleClicked(const QModelIndex &index);
 
 private:
     Ui::v2Ui *ui;
     getServerDialog * dialog;
+    void updateList();
+    QMap<QString , v2Server *> listMap;
+
 };
 #endif // V2UI_H

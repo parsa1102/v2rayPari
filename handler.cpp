@@ -47,7 +47,6 @@ void Handler::setActiveServer(v2Server * server)
 
 void Handler::connectToServer(v2Server * serverToConnect)
 {
-    //QJsonDocument * json = activeServer->serverJson;
     QJsonDocument * json = serverToConnect->serverJson;
     QString jsonString = QString(json->toJson());
     QFile config("/home/arad/proj/v2rayParsa/v2rayRunner/config.json");
@@ -55,15 +54,19 @@ void Handler::connectToServer(v2Server * serverToConnect)
     config.resize(0);
     config.write(jsonString.toUtf8());
     config.flush();
-    //process->start();
     connect(process , &QProcess::readyReadStandardOutput , this , &Handler::readyReadStandardOutput);
     process->setWorkingDirectory("/home/arad/proj/v2rayParsa/v2rayRunner");
     process->start("/home/arad/proj/v2rayParsa/v2rayRunner/v2ray" , QStringList() << "run");
     process->waitForStarted();
-    //connect(process , &QProcess::readyReadStandardError , this , &Handler::readyReadStandardOutput);
-    //process->waitForFinished();
     qInfo()<<"finished";
-    //qInfo()<<process->errorString();
+}
+
+void Handler::disconnect()
+{
+    qInfo()<<"killing process";
+    process->kill();
+    process->waitForFinished();
+    qInfo()<<"actually finished";
 }
 
 void Handler::readyReadStandardOutput()

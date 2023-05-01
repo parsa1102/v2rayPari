@@ -19,6 +19,7 @@ public:
     v2Server * activeServer=nullptr;
     void setActiveServer(v2Server * server);
     void connectToServer(v2Server * serverToConnect);
+    void disconnect();
 
 private:
     QProcess * process;
