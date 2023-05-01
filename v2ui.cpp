@@ -21,6 +21,7 @@ v2Ui::v2Ui(QWidget *parent)
     handler = new Handler(new QObject ,this);
     dialog = new getServerDialog(this);
     connect(handler , &Handler::serverAdded , this , &v2Ui::serverAdded);
+    ui->deleteServerButton->setEnabled(false);
 }
 
 v2Ui::~v2Ui()
@@ -80,4 +81,17 @@ void v2Ui::on_listWidget_doubleClicked(const QModelIndex &index)
         handler->disconnect();
         handler->connectToServer(handler->activeServer);
     }
+}
+
+
+void v2Ui::on_listWidget_clicked(const QModelIndex &index)
+{
+    ui->deleteServerButton->setEnabled(true);
+    selectedServer = listMap[index.data().toString()];
+}
+
+void v2Ui::on_deleteServerButton_clicked()
+{
+    handler->removeServer(selectedServer);
+    updateList();
 }

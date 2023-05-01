@@ -37,11 +37,17 @@ private slots:
 
     void on_listWidget_doubleClicked(const QModelIndex &index);
 
+
+    void on_listWidget_clicked(const QModelIndex &index);
+
+    void on_deleteServerButton_clicked();
+
 private:
     Ui::v2Ui *ui;
     getServerDialog * dialog;
     void updateList();
     QMap<QString , v2Server *> listMap;
+    v2Server * selectedServer;
 
 };
 #endif // V2UI_H
