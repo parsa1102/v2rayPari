@@ -31,7 +31,7 @@ v2Ui::~v2Ui()
 
 void v2Ui::setV2rayOutput(QString str)
 {
-    ui->v2rayOutput->setText(str);
+    ui->v2rayOutput->append(str);
 }
 
 
