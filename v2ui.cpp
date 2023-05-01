@@ -76,4 +76,8 @@ void v2Ui::on_listWidget_doubleClicked(const QModelIndex &index)
 {
     v2Server * tempServer = listMap[index.data(Qt::DisplayRole).toString()];
     handler->activeServer = tempServer;
+    if(handler->isConnected){
+        handler->disconnect();
+        handler->connectToServer(handler->activeServer);
+    }
 }

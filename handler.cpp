@@ -13,6 +13,7 @@
 Handler::Handler(QObject *parent, v2Ui * ui) : QObject(parent)
 {
     qInfo()<<"handler started";
+    isConnected = false;
     Ui = ui;
     process = new QProcess;
 
@@ -58,6 +59,7 @@ void Handler::connectToServer(v2Server * serverToConnect)
     process->setWorkingDirectory("/home/arad/proj/v2rayParsa/v2rayRunner");
     process->start("/home/arad/proj/v2rayParsa/v2rayRunner/v2ray" , QStringList() << "run");
     process->waitForStarted();
+    isConnected = true;
     qInfo()<<"finished";
 }
 
@@ -67,6 +69,7 @@ void Handler::disconnect()
     process->kill();
     process->waitForFinished();
     qInfo()<<"actually finished";
+    isConnected = false;
 }
 
 void Handler::readyReadStandardOutput()

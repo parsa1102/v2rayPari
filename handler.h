@@ -20,10 +20,12 @@ public:
     void setActiveServer(v2Server * server);
     void connectToServer(v2Server * serverToConnect);
     void disconnect();
+    bool isConnected;
 
 private:
     QProcess * process;
     v2Ui * Ui;
+
 
 signals:
     void serverAdded(v2Server * server);
